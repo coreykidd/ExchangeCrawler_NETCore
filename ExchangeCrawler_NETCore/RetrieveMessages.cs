@@ -1,0 +1,115 @@
+﻿using System;
+using System.IO;
+using System.Collections.ObjectModel;
+using System.Linq;
+using Microsoft.Exchange.WebServices.Data;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace ExchangeCrawl
+{
+    class RetrieveMessages
+    {
+        static IUserData UserData = UserDataFromConsole.GetUserData();
+        static ExchangeService service = Service.ConnectToService(UserData, new TraceListener());
+
+        static void Main(string[] args)
+        {
+            Task<Folder> rootFolder = Folder.Bind(service, WellKnownFolderName.MsgFolderRoot);
+            Task<FindFoldersResults> childFolders = rootFolder.Result.FindFolders(new FolderView(rootFolder.Result.ChildFolderCount));
+            List<MessageIndexObject> messageIndexObjects = new List<MessageIndexObject>();
+            List<Folder> allFolders = new List<Folder>();
+
+            //Build the allFolders list
+            foreach (Folder f in childFolders.Result)
+            {
+                if ((String.Equals(f.DisplayName, "Inbox")) || (String.Equals(f.DisplayName, "Conversation History"))
+                    || (String.Equals(f.DisplayName, "Save")) || (String.Equals(f.DisplayName, "Trips")) || (String.Equals(f.DisplayName, "Sent Items")))
+                {
+                    allFolders.Add(f);
+                    if (f.ChildFolderCount > 0)
+                    {
+                        FolderView folderView = new FolderView(f.ChildFolderCount);
+                        GetSubFolders(f, folderView, allFolders);
+                    }
+                }
+            }
+
+            foreach (Folder f in allFolders)
+            {
+                GetMessages(f);
+            }
+        }
+
+        public static void GetSubFolders(Folder folder, FolderView folderView, List<Folder> allFolders)
+        {
+            Task<FindFoldersResults> subFolders = folder.FindFolders(folderView);
+            allFolders.AddRange(subFolders.Result.Folders);
+
+            foreach (Folder f in subFolders.Result)
+            {
+                if (f.ChildFolderCount > 0)
+                {
+                    FolderView folderViewSub = new FolderView(f.ChildFolderCount);
+                    GetSubFolders(f, folderViewSub, allFolders);
+                }
+            }
+        }
+
+        public static void GetMessages(Folder folder)
+        {
+            int itemCount = folder.TotalCount;
+            Task<FindItemsResults<Item>> results = null;
+
+
+
+            for (int i = 0; i < itemCount; i += 200)
+            {
+                List<MessageIndexObject> messageIndexObjects = new List<MessageIndexObject>();
+                ItemView view = new ItemView(200, i);
+                results = service.FindItems(folder.Id, view);
+
+                if (results.Result.Items.Count > 0)
+                {
+                    PropertySet propSet = new PropertySet(BasePropertySet.FirstClassProperties, EmailMessageSchema.TextBody);
+                    ExtendedPropertyDefinition extendedProps = new ExtendedPropertyDefinition(0x0FFF, MapiPropertyType.Binary);
+                    propSet.Add(ItemSchema.StoreEntryId);
+                    propSet.Add(extendedProps);
+                    service.LoadPropertiesForItems(results.Result, propSet);
+                    foreach (Item k in results.Result)
+                    {
+                        Byte[] EntryVal = null;
+                        String HexEntryId = "";
+                        if (k.TryGetProperty(extendedProps, out EntryVal))
+                        {
+                            HexEntryId = BitConverter.ToString(EntryVal).Replace("-", "");
+                        }
+                        try
+                        {
+                            messageIndexObjects.Add(new MessageIndexObject(k.Subject, k.TextBody, HexEntryId));
+                        }
+                        catch (ServiceObjectPropertyException sope)
+                        {
+                            try
+                            {
+                                messageIndexObjects.Add(new MessageIndexObject(k.Subject, "", ""));
+                            }
+                            catch (Exception e)
+                            {
+
+                            }
+                            finally
+                            {
+                                //TODO Logging code goes here
+                            }
+                        }
+                    }
+                    //Push 200 messages for indexing at a time
+                    Indexer indexer = new Indexer();
+                    indexer.PushMessages(messageIndexObjects);
+                }
+            }
+        }
+    }
+}
