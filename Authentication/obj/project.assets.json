@@ -236,19 +236,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ckidd\\.nuget\\packages\\": {}
+    "C:\\Users\\ckmaster\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ckidd\\source\\repos\\ExchangeCrawler_NETCore\\Authentication\\Authentication.csproj",
+      "projectUniqueName": "C:\\Users\\ckmaster\\source\\repos\\ExchangeCrawler_NETCore\\Authentication\\Authentication.csproj",
       "projectName": "Authentication",
-      "projectPath": "C:\\Users\\ckidd\\source\\repos\\ExchangeCrawler_NETCore\\Authentication\\Authentication.csproj",
-      "packagesPath": "C:\\Users\\ckidd\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ckidd\\source\\repos\\ExchangeCrawler_NETCore\\Authentication\\obj\\",
+      "projectPath": "C:\\Users\\ckmaster\\source\\repos\\ExchangeCrawler_NETCore\\Authentication\\Authentication.csproj",
+      "packagesPath": "C:\\Users\\ckmaster\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ckmaster\\source\\repos\\ExchangeCrawler_NETCore\\Authentication\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\ckidd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ckmaster\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

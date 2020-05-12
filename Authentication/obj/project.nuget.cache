@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "JcJRDHw1dhh7fl4BOk2QfBLGU7lFte/KntazxvJ6F03dGFbTzpmVH1aC/f+NIaRXtepq1RXr/uWERSGJ9QVSaw==",
+  "dgSpecHash": "cVe/3w2UJNiuLJHB+uX3BUFTS6SwdvUqe+C+sm6yL7WcIi51vF5G9kLf9UodNHw+ZbqDIdSZTky4LkknJEultA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ckidd\\source\\repos\\ExchangeCrawler_NETCore\\Authentication\\Authentication.csproj",
+  "projectFilePath": "C:\\Users\\ckmaster\\source\\repos\\ExchangeCrawler_NETCore\\Authentication\\Authentication.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\ckidd\\.nuget\\packages\\microsoft.exchange.webservices.netstandard\\1.1.3\\microsoft.exchange.webservices.netstandard.1.1.3.nupkg.sha512",
-    "C:\\Users\\ckidd\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\ckidd\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
-    "C:\\Users\\ckidd\\.nuget\\packages\\system.security.cryptography.xml\\4.4.0\\system.security.cryptography.xml.4.4.0.nupkg.sha512"
+    "C:\\Users\\ckmaster\\.nuget\\packages\\microsoft.exchange.webservices.netstandard\\1.1.3\\microsoft.exchange.webservices.netstandard.1.1.3.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\ckmaster\\.nuget\\packages\\system.security.cryptography.xml\\4.4.0\\system.security.cryptography.xml.4.4.0.nupkg.sha512"
   ],
   "logs": []
 }

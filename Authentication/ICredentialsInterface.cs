@@ -1,6 +1,6 @@
 ﻿using System.Security;
 
-namespace Authentication
+namespace ExchangeCrawl
 {
     interface ICredentialsInterface
     {

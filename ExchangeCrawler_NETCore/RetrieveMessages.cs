@@ -39,22 +39,28 @@ namespace ExchangeCrawl
             foreach (Folder f in allFolders)
             {
                 int itemCount = f.TotalCount;
-                GetMessages(f, itemCount);
+                GetMessagesWithTasks(f, itemCount);
             }
         }
 
 
         public static void GetMessagesWithTasks(Folder folder, int itemCount)
         {
-            System.Threading.Tasks.Task.Run(() => GetMessages(folder, itemCount));
-
+            //TODO should this be task.run in a lambda?  I don't know what I'm doing...
+            System.Threading.Tasks.Task t = new System.Threading.Tasks.Task(() =>
+            {
+                GetMessages(folder, itemCount);
+            });
+            t.Start();
+            t.Wait();
         }
 
+        //refactor to return message index object task
         public static void GetMessages(Folder folder, int itemCount)
         {
             Task<FindItemsResults<Item>> results = null;
 
-            //take out for loop
+            //TODO take out for loop
             //pass in size and offset for ItemView
             for (int i = 0; i < itemCount; i += 200)
             {
@@ -97,6 +103,7 @@ namespace ExchangeCrawl
                             }
                         }
                     }
+                    //TODO break into own method and put in metrics
                     //Push 200 messages for indexing at a time
                     Indexer indexer = new Indexer();
                     indexer.PushMessages(messageIndexObjects);

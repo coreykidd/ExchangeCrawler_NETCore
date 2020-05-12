@@ -304,19 +304,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ckidd\\.nuget\\packages\\": {}
+    "C:\\Users\\ckmaster\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ckidd\\source\\repos\\ExchangeCrawler_NETCore\\ExchangeCrawler_NETCore\\ExchangeCrawler_NETCore.csproj",
+      "projectUniqueName": "C:\\Users\\ckmaster\\source\\repos\\ExchangeCrawler_NETCore\\ExchangeCrawler_NETCore\\ExchangeCrawler_NETCore.csproj",
       "projectName": "ExchangeCrawler_NETCore",
-      "projectPath": "C:\\Users\\ckidd\\source\\repos\\ExchangeCrawler_NETCore\\ExchangeCrawler_NETCore\\ExchangeCrawler_NETCore.csproj",
-      "packagesPath": "C:\\Users\\ckidd\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ckidd\\source\\repos\\ExchangeCrawler_NETCore\\ExchangeCrawler_NETCore\\obj\\",
+      "projectPath": "C:\\Users\\ckmaster\\source\\repos\\ExchangeCrawler_NETCore\\ExchangeCrawler_NETCore\\ExchangeCrawler_NETCore.csproj",
+      "packagesPath": "C:\\Users\\ckmaster\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ckmaster\\source\\repos\\ExchangeCrawler_NETCore\\ExchangeCrawler_NETCore\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\ckidd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ckmaster\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -329,8 +333,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\ckidd\\source\\repos\\ExchangeCrawler_NETCore\\Authentication\\Authentication.csproj": {
-              "projectPath": "C:\\Users\\ckidd\\source\\repos\\ExchangeCrawler_NETCore\\Authentication\\Authentication.csproj"
+            "C:\\Users\\ckmaster\\source\\repos\\ExchangeCrawler_NETCore\\Authentication\\Authentication.csproj": {
+              "projectPath": "C:\\Users\\ckmaster\\source\\repos\\ExchangeCrawler_NETCore\\Authentication\\Authentication.csproj"
             }
           }
         }
