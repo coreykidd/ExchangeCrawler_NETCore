@@ -38,32 +38,24 @@ namespace ExchangeCrawl
 
             foreach (Folder f in allFolders)
             {
-                GetMessages(f);
+                int itemCount = f.TotalCount;
+                GetMessages(f, itemCount);
             }
         }
 
-        public static void GetSubFolders(Folder folder, FolderView folderView, List<Folder> allFolders)
-        {
-            Task<FindFoldersResults> subFolders = folder.FindFolders(folderView);
-            allFolders.AddRange(subFolders.Result.Folders);
 
-            foreach (Folder f in subFolders.Result)
-            {
-                if (f.ChildFolderCount > 0)
-                {
-                    FolderView folderViewSub = new FolderView(f.ChildFolderCount);
-                    GetSubFolders(f, folderViewSub, allFolders);
-                }
-            }
+        public static void GetMessagesWithTasks(Folder folder, int itemCount)
+        {
+            System.Threading.Tasks.Task.Run(() => GetMessages(folder, itemCount));
+
         }
 
-        public static void GetMessages(Folder folder)
+        public static void GetMessages(Folder folder, int itemCount)
         {
-            int itemCount = folder.TotalCount;
             Task<FindItemsResults<Item>> results = null;
 
-
-
+            //take out for loop
+            //pass in size and offset for ItemView
             for (int i = 0; i < itemCount; i += 200)
             {
                 List<MessageIndexObject> messageIndexObjects = new List<MessageIndexObject>();
@@ -111,5 +103,22 @@ namespace ExchangeCrawl
                 }
             }
         }
+
+
+        public static void GetSubFolders(Folder folder, FolderView folderView, List<Folder> allFolders)
+        {
+            Task<FindFoldersResults> subFolders = folder.FindFolders(folderView);
+            allFolders.AddRange(subFolders.Result.Folders);
+
+            foreach (Folder f in subFolders.Result)
+            {
+                if (f.ChildFolderCount > 0)
+                {
+                    FolderView folderViewSub = new FolderView(f.ChildFolderCount);
+                    GetSubFolders(f, folderViewSub, allFolders);
+                }
+            }
+        }
+
     }
 }
